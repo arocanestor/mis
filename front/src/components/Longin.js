@@ -8,7 +8,7 @@ export default class Login extends Component {
         this.state = {
             user:'',
             password: '',
-            login: false
+            login: localStorage.getItem('Autorized')
         }
     }
     onInputChanges = (e) => {       
@@ -20,21 +20,20 @@ export default class Login extends Component {
     }
 
     onSubmit = async () => {
-        await axios.post('http://localhost:4000/api/misas/login', {
+        await axios.post('http://apicalendariomisas.argodevs.com/api/misas/login', {
             user: this.state.user,
             password: this.state.password
         }).then((a) => {
             console.log(a.data.token)
-            localStorage.setItem('Autorized', a.data.token);
-            this.setState({ login: true })
-            window.location.replace('http://localhost:3000');
+            localStorage.setItem('Autorized', a.data.token);          
+            
         })
     }
 
     render() {    
         if(this.state.login){
             return(<Redirect to ='/'/> )
-         }  
+         }  else {
             return (
                 <div className="d-flex justify-content-center">
                     <div>
@@ -73,6 +72,8 @@ export default class Login extends Component {
                     </div>
                 </div>
         )
+         }
+           
     }
     
 }

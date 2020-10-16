@@ -138,7 +138,7 @@ export default class DemoApp extends Component {
   }
   buscarMisas = async (horaMisa) => {
     const date = this.state.dia
-    await axios.post('http://localhost:4000/api/misas/hora', {
+    await axios.post('http://apicalendariomisas.argodevs.com/api/misas/hora', {
       dia: date,
       hora: horaMisa
     })
@@ -160,7 +160,7 @@ export default class DemoApp extends Component {
     e.preventDefault();
     // eslint-disable-next-line
     if (this.state.numeroDia == 0 || this.state.numeroDia == 3) {
-      await axios.post('http://localhost:4000/api/misas', {
+      await axios.post('http://apicalendariomisas.argodevs.com/api/misas', {
         dia: this.state.dia,
         tel: this.state.tel,
         para: this.state.para,
@@ -176,7 +176,7 @@ export default class DemoApp extends Component {
           this.activarM()
         })
     } else {
-      await axios.post('http://localhost:4000/api/misas', {
+      await axios.post('http://apicalendariomisas.argodevs.com/api/misas', {
         dia: this.state.dia,
         tel: this.state.tel,
         para: this.state.para,
@@ -200,7 +200,7 @@ export default class DemoApp extends Component {
     this.setState({ newMisa: !this.state.newMisa })
   }
   eliminarMisa = async (id) => {
-    await axios.delete('http://localhost:4000/api/misas/' + id)
+    await axios.delete('http://apicalendariomisas.argodevs.com/api/misas/' + id)
       .then((a) =>{
         console.log(a.data)
         this.buscarMisas(1)
@@ -408,7 +408,7 @@ export default class DemoApp extends Component {
 
   }
   botonLista = async () => {
-    window.open('http://localhost:4000/api/misas/' + this.state.dia)
+    window.open('http://apicalendariomisas.argodevs.com/api/misas/' + this.state.dia)
   }
 
   numeroMisasDis = () => {
