@@ -1,10 +1,10 @@
-const jwt = require('jsonwebtoken');
 const { Router } = require('express');
 const router = Router();
 const Misa = require('../models/Misas');
 const xl = require('excel4node');
 var wb = new xl.Workbook();
 var ws = wb.addWorksheet('Sheet 1');
+const jwt = require('jsonwebtoken');
 
 
 var style = wb.createStyle({
@@ -52,24 +52,17 @@ router.get('/:dia', async(req, res) => {
 router.post('/login', (req, res) => {
     var username = req.body.user
     var password = req.body.password
+
+    const token = jwt.sign({
+      data: 'fatima'
+    }, 'secret', { expiresIn: '3h' });
   
-    if( !(username === 'leonel' && password === 'admin')){
+    if( username == 'leonel' && password == 'admin' ){
+      res.json(token)      
+    } else {      
       res.status(401).send({
         error: 'usuario o contraseña inválidos'
-      })      
-    } else {
-      var tokenData = {
-        username: username
-        // ANY DATA
-      }
-    
-      var token = jwt.sign(tokenData, 'Secret Password', {
-         expiresIn: 60 * 60 * 24 // expires in 24 hours
-      })
-    
-      res.send({
-        token
-      })
+      })        
     }
   })
 

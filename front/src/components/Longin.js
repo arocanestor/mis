@@ -8,7 +8,7 @@ export default class Login extends Component {
         this.state = {
             user:'',
             password: '',
-            login: localStorage.getItem('Autorized')
+            login: sessionStorage.getItem('Autorized')
         }
     }
     onInputChanges = (e) => {       
@@ -16,18 +16,16 @@ export default class Login extends Component {
             [e.target.name]: e.target.value
         })
         e.preventDefault();
-        console.log(this.state.user)   
+        console.log(this.state.login)   
     }
 
     onSubmit = async () => {
-        await axios.post('http://apicalendariomisas.argodevs.com/api/misas/login', {
+        await axios.post('http://apicalendariomisas.argodevs.com/api/misas/login',{
             user: this.state.user,
-            password: this.state.password
-        }).then((a) => {
-            console.log(a.data.token)
-            localStorage.setItem('Autorized', a.data.token);          
-            
-        })
+            password:this.state.password
+       }).then((a) => {
+            sessionStorage.setItem('Autorized', a.data);  
+       })
     }
 
     render() {    

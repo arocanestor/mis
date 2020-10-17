@@ -25,7 +25,7 @@ export default class DemoApp extends Component {
       diaFestivo: false,
       numerM1: 0,
       numerM2: 0,
-      login: localStorage.getItem("Autorized")
+      login: sessionStorage.getItem("Autorized")
     }
 
   }
