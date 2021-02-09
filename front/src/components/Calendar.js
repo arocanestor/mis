@@ -12,7 +12,7 @@ import {
   FormGroup,
   Label,
 } from "reactstrap";
-var endpoint = "http://localhost:4000";
+var endpoint = "http://apicalendariomisas.argodevs.com";
 export default class DemoApp extends Component {
   constructor(props) {
     super(props);
